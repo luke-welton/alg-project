@@ -1,6 +1,5 @@
 #include "algorithms.h"
 #include <algorithm>
-
 using namespace std;
 
 /**
@@ -10,7 +9,7 @@ using namespace std;
  * @param q - The closing bound to look at in the array
  * @return The maximum sum of the elements within the bounds on the array
  **/
-int algorithm1 (const int * x[], int p, int q) {
+int algorithm1(const int x[], int p, int q) {
     int maxSoFar = 0;
 
     for (int l = p; l <= q; l++) {
@@ -18,7 +17,7 @@ int algorithm1 (const int * x[], int p, int q) {
             int sum = 0;
 
             for (int i = l; i <= u; i++) {
-                sum += *(x[i]);
+                sum += x[i];
             }
 
             maxSoFar = max(maxSoFar, sum);
@@ -35,17 +34,16 @@ int algorithm1 (const int * x[], int p, int q) {
  * @param q - The closing bound to look at in the array
  * @return The maximum sum of the elements within the bounds on the array
  **/
-int algorithm2 (const int * x[], int p, int q) {
+int algorithm2(const int x[], int p, int q) {
     int maxSoFar = 0;
 
     for (int l = p; l <= q; l++) {
         int sum = 0;
 
         for (int u = l; u <= q; u++) {
-            sum += *(x[u]);
+            sum += x[u];
+            maxSoFar = max(maxSoFar, sum);
         }
-
-        maxSoFar = max(maxSoFar, sum);
     }
 
     return maxSoFar;
@@ -58,24 +56,24 @@ int algorithm2 (const int * x[], int p, int q) {
  * @param u - The upper bound to look at in the array
  * @return The maximum sum of the elements within the bounds on the array
  **/
-int algorithm3 (const int * x[], int l, int u) {
+int algorithm3(const int x[], int l, int u) {
     if (l > u) {
         return 0;
     } else if (l == u) {
-        return max(0, *(x[l]));
+        return max(0, x[l]);
     }
 
     int m = (l + u) / 2;
 
     int sum = 0, maxToLeft = 0;
     for (int i = m; i >= l; i--) {
-        sum += *(x[i]);
+        sum += x[i];
         maxToLeft = max(maxToLeft, sum);
     }
 
     int maxToRight = sum = 0;
     for (int i = m + 1; i <= u; i++) {
-        sum += *(x[i]);
+        sum += x[i];
         maxToRight = max(maxToRight, sum);
     }
 
@@ -93,11 +91,11 @@ int algorithm3 (const int * x[], int l, int u) {
  * @param q - The closing bound to look at in the array
  * @return The maximum sum of the elements within the bounds on the array
  **/
-int algorithm4 (int * x[], int p, int q) {
+int algorithm4(const int x[], int p, int q) {
     int maxSoFar = 0, maxEndingHere = 0;
 
     for (int i = p; i <= q; i++) {
-        maxEndingHere = max(0, maxEndingHere + *(x[i]));
+        maxEndingHere = max(0, maxEndingHere + x[i]);
         maxSoFar = max(maxSoFar, maxEndingHere);
     }
 
