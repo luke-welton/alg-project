@@ -64,7 +64,7 @@ void randomizedAlgs() {
             algorithm1(arrays[i], 0, 5 * (i + 1));
         }
         end = clock();
-        times[i][0] = (end, start) / (double) CLOCKS_PER_SEC * 1000;
+        times[i][0] = (end - start) / (double) CLOCKS_PER_SEC * 1000;
 
 
         start = clock();
@@ -72,7 +72,7 @@ void randomizedAlgs() {
             algorithm2(arrays[i], 0, 5 * (i + 1));
         }
         end = clock();
-        times[i][1] = (end, start) / (double) CLOCKS_PER_SEC * 1000;
+        times[i][1] = (end - start) / (double) CLOCKS_PER_SEC * 1000;
 
 
         start = clock();
@@ -80,7 +80,7 @@ void randomizedAlgs() {
             algorithm3(arrays[i], 0, 5 * (i + 1));
         }
         end = clock();
-        times[i][2] = (end, start) / (double) CLOCKS_PER_SEC * 1000;
+        times[i][2] = (end - start) / (double) CLOCKS_PER_SEC * 1000;
 
 
         start = clock();
@@ -88,7 +88,7 @@ void randomizedAlgs() {
             algorithm4(arrays[i], 0, 5 * (i + 1));
         }
         end = clock();
-        times[i][3] = (end, start) / (double) CLOCKS_PER_SEC * 1000;
+        times[i][3] = (end - start) / (double) CLOCKS_PER_SEC * 1000;
 
         for (int j = 1; j <= 4; j++) {
             times[i][3 + j] = calculateComplexity(5 * (i + 1), j);
