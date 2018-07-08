@@ -58,7 +58,7 @@ void presetAlgs() {
 void randomizedAlgs() {
     srand(time(NULL));
 
-    int* arrays[19];
+    int* arrays[20];
     for (int i = 0; i < 20; i++) {
         int newArray[5 * (i + 1)];
         for (int j = 0; j < 5 * (i + 1); j++) {
