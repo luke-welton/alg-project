@@ -113,7 +113,7 @@ void randomizedAlgs() {
     ofstream outStream;
     outStream.open("lucaswelton_phw_output.txt");
 
-    outStream << "Algorithm1,Algorithm2,Algorithm3,Algorithm4,T1(n),T2(n),T3(n),T4(n)";
+    outStream << "Algorithm1,Algorithm2,Algorithm3,Algorithm4,T1(n),T2(n),T3(n),T4(n)" << endl;
 
     for (int i = 0; i < 20; i++) {
         outStream << times[i][0] << "," << times[i][1] << "," << times[i][2] << "," << times[i][3] << ","
