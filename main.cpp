@@ -2,16 +2,18 @@
 #include <sstream>
 #include <cstdlib>
 #include <iostream>
-#include <ctime>
+#include <cmath>
 #include "algorithms.h"
 using namespace std;
 
 void presetAlgs();
 void randomizedAlgs();
+int calculateComplexity(int size, int alg);
 
 int main() {
     presetAlgs();
     randomizedAlgs();
+    exit(0);
 }
 
 void presetAlgs() {
@@ -42,7 +44,7 @@ void randomizedAlgs() {
     srand(time(NULL));
 
     int* arrays[19];
-    for (int i = 0; i < 19; i++) {
+    for (int i = 0; i < 20; i++) {
         int newArray[5 * (i + 1)];
         for (int j = 0; j < 5 * (i + 1); j++) {
             int multiplier = rand() % 2 == 1 ? -1 : 1;
@@ -52,46 +54,70 @@ void randomizedAlgs() {
         arrays[i] = newArray;
     }
 
-    double times[19][4];
-    for (int i = 0; i < 19; i++) {
+    double times[20][8];
+    int runs = 5000;
+    for (int i = 0; i < 20; i++) {
         clock_t start, end;
 
         start = clock();
-        for (int t = 0; t < 25000; t++) {
+        for (int t = 0; t < runs; t++) {
             algorithm1(arrays[i], 0, 5 * (i + 1));
         }
         end = clock();
-        times[i][0] = (end, start) / (double) CLOCKS_PER_SEC;
+        times[i][0] = (end, start) / (double) CLOCKS_PER_SEC * 1000;
 
 
         start = clock();
-        for (int t = 0; t < 25000; t++) {
+        for (int t = 0; t < runs; t++) {
             algorithm2(arrays[i], 0, 5 * (i + 1));
         }
         end = clock();
-        times[i][1] = (end, start) / (double) CLOCKS_PER_SEC;
+        times[i][1] = (end, start) / (double) CLOCKS_PER_SEC * 1000;
 
 
         start = clock();
-        for (int t = 0; t < 25000; t++) {
+        for (int t = 0; t < runs; t++) {
             algorithm3(arrays[i], 0, 5 * (i + 1));
         }
         end = clock();
-        times[i][2] = (end, start) / (double) CLOCKS_PER_SEC;
+        times[i][2] = (end, start) / (double) CLOCKS_PER_SEC * 1000;
 
 
         start = clock();
-        for (int t = 0; t < 25000; t++) {
+        for (int t = 0; t < runs; t++) {
             algorithm4(arrays[i], 0, 5 * (i + 1));
         }
         end = clock();
-        times[i][3] = (end, start) / (double) CLOCKS_PER_SEC;
+        times[i][3] = (end, start) / (double) CLOCKS_PER_SEC * 1000;
+
+        for (int j = 1; j <= 4; j++) {
+            times[i][3 + j] = calculateComplexity(5 * (i + 1), j);
+        }
     }
 
     ofstream outStream;
     outStream.open("lucaswelton_phw_output.txt");
-    for (int i = 0; i < 19; i++) {
-        outStream << times[i][0] << "," << times[i][1] << "," << times[i][2] << "," << times[i][3] << endl;
+    for (int i = 0; i < 20; i++) {
+        outStream << times[i][0] << "," << times[i][1] << "," << times[i][2] << "," << times[i][3] << ","
+                  << times[i][4] << "," << times[i][5] << "," << times[i][6] << "," << times[i][7] << endl;
     }
     outStream.close();
+}
+
+int calculateComplexity(int size, int alg) {
+    switch (alg) {
+        case 1: {
+            return (int) (4 / 3 * pow(size, 3) + 10 * pow(size, 2) + 41 / 3 * size + 8);
+        }
+        case 2: {
+            return (int) (13 / 2 * pow(size, 2) + 23 / 2 * size + 8);
+        }
+        case 3: {
+            return (int) (12 * size * log2(size) + 24 * size - 17);
+        }
+        case 4: {
+            return 14 * size + 5;
+        }
+        default: return 0;
+    }
 }

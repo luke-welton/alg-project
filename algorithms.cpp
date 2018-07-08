@@ -1,6 +1,4 @@
 #include "algorithms.h"
-#include <algorithm>
-using namespace std;
 
 /**
  * Performs the first algorithm.
@@ -81,7 +79,7 @@ int algorithm3(const int x[], int l, int u) {
     int maxInA = algorithm3(x, l, m);
     int maxInB = algorithm3(x, m + 1, u);
 
-    return max(maxCrossing, max(maxInA, maxInB));
+    return max(maxCrossing, maxInA, maxInB);
 }
 
 /**
@@ -100,4 +98,15 @@ int algorithm4(const int x[], int p, int q) {
     }
 
     return maxSoFar;
+}
+
+int max(int a, int b) {
+    if (a >= b) return a;
+    else return b;
+}
+
+int max(int a, int b, int c) {
+    if (a >= b && a >= c) return a;
+    else if (b >= a && b >= c) return b;
+    else return c;
 }
