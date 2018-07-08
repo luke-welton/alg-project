@@ -55,7 +55,7 @@ void randomizedAlgs() {
     }
 
     double times[20][8];
-    int runs = 5000;
+    int runs = 100000;
     for (int i = 0; i < 20; i++) {
         clock_t start, end;
 
@@ -64,7 +64,7 @@ void randomizedAlgs() {
             algorithm1(arrays[i], 0, 5 * (i + 1));
         }
         end = clock();
-        times[i][0] = (end - start) / (double) CLOCKS_PER_SEC * 1000;
+        times[i][0] = (end - start) * 10000 / (double) CLOCKS_PER_SEC;
 
 
         start = clock();
@@ -72,7 +72,7 @@ void randomizedAlgs() {
             algorithm2(arrays[i], 0, 5 * (i + 1));
         }
         end = clock();
-        times[i][1] = (end - start) / (double) CLOCKS_PER_SEC * 1000;
+        times[i][1] = (end - start) * 10000 / (double) CLOCKS_PER_SEC;
 
 
         start = clock();
@@ -80,7 +80,7 @@ void randomizedAlgs() {
             algorithm3(arrays[i], 0, 5 * (i + 1));
         }
         end = clock();
-        times[i][2] = (end - start) / (double) CLOCKS_PER_SEC * 1000;
+        times[i][2] = (end - start) * 10000 / (double) CLOCKS_PER_SEC;
 
 
         start = clock();
@@ -88,7 +88,7 @@ void randomizedAlgs() {
             algorithm4(arrays[i], 0, 5 * (i + 1));
         }
         end = clock();
-        times[i][3] = (end - start) / (double) CLOCKS_PER_SEC * 1000;
+        times[i][3] = (end - start) * 10000 / (double) CLOCKS_PER_SEC;
 
         for (int j = 1; j <= 4; j++) {
             times[i][3 + j] = calculateComplexity(5 * (i + 1), j);
@@ -97,6 +97,9 @@ void randomizedAlgs() {
 
     ofstream outStream;
     outStream.open("lucaswelton_phw_output.txt");
+
+    outStream << "Algorithm1,Algorithm2,Algorithm3,Algorithm4,T1(n),T2(n),T3(n),T4(n)";
+
     for (int i = 0; i < 20; i++) {
         outStream << times[i][0] << "," << times[i][1] << "," << times[i][2] << "," << times[i][3] << ","
                   << times[i][4] << "," << times[i][5] << "," << times[i][6] << "," << times[i][7] << endl;
