@@ -100,11 +100,24 @@ int algorithm4(const int x[], int p, int q) {
     return maxSoFar;
 }
 
+/**
+ * Handles finding the max of two given integers.
+ * @param a - The first integer to compare.
+ * @param b - The second integer to compare.
+ * @return - The maximum of the two integers.
+ **/
 int max(int a, int b) {
     if (a >= b) return a;
     else return b;
 }
 
+/**
+ * Handles finding the max of three given integers.
+ * @param a - The first integer to compare.
+ * @param b - The second integer to compare.
+ * @param c - The third integer to compare.
+ * @return - The maximum of the three integers.
+ **/
 int max(int a, int b, int c) {
     if (a >= b && a >= c) return a;
     else if (b >= a && b >= c) return b;

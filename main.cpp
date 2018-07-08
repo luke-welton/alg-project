@@ -10,12 +10,22 @@ void presetAlgs();
 void randomizedAlgs();
 int calculateComplexity(int size, int alg);
 
+/**
+ * This is the main function for the project.
+ * It handles every function that the project needs to perform.
+ **/
 int main() {
     presetAlgs();
     randomizedAlgs();
     exit(0);
 }
 
+/**
+ * This ensures that all four algorithms calculate what they are supposed to.
+ * It runs through all four of them and outputs their result.
+ * If any one if the algorithms has a different result, then at least one algorithm is not correct.
+ * Fortunately, from my running, they seem to work correctly.
+ **/
 void presetAlgs() {
     ifstream inStream;
 
@@ -40,6 +50,11 @@ void presetAlgs() {
     }
 }
 
+/**
+ * This handles running each algorithm with increasingly large arrays a large number of times.
+ * It measures the time for each array to run a set number of times and records them into a matrix.
+ * It also calculates how long said array should take, using the measurements I calculated by hand.
+ **/
 void randomizedAlgs() {
     srand(time(NULL));
 
@@ -107,6 +122,12 @@ void randomizedAlgs() {
     outStream.close();
 }
 
+/**
+ * This handles calculating how long it should take an algorithm to perform on an array of a given size.
+ * @param size - The size of the array the algorithm is being performed on.
+ * @param alg - The number of the algorithm, as each one takes a different amount of time.
+ * @return - The calculated amount of time the algorithm should take.
+ **/
 int calculateComplexity(int size, int alg) {
     switch (alg) {
         case 1: {
